@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   useDisclosure,
   FormControl,
   FormLabel,
@@ -56,7 +55,13 @@ const AddTaskForm = () => {
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={handleCreateTask}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                handleCreateTask()
+                onClose()
+              }}
+            >
               Create Task
             </Button>
           </ModalFooter>
