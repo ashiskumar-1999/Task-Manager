@@ -25,8 +25,6 @@ const ShowTaskInfo = ({
       <ModalContent>
         <ModalHeader>Modal Title</ModalHeader>
 
-        <ModalBody>bala</ModalBody>
-
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={showTaskInfoOnClose}>
             Close
