@@ -3,16 +3,11 @@ import { Box, Button, Text, Flex, useDisclosure } from "@chakra-ui/react"
 import ShowTaskInfo from "./ShowTaskInfo"
 
 const TaskContainer = ({ label, title }) => {
-  const [showTaskInfo, setTaskInfo] = useState(false)
   const {
     isOpen: showTaskInfoIsOpen,
     onOpen: showTaskInfoOnOpen,
     onClose: showTaskInfoOnClose,
   } = useDisclosure()
-  const handleClick = () => {
-    setTaskInfo(true)
-  }
-  console.log("showTaskInfo:", showTaskInfo)
   return (
     <>
       <Flex
