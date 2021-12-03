@@ -4,7 +4,7 @@ import TaskContainer from "./TaskContainer"
 const NewTaskSection = ({}) => {
   const [tasktitle, setTaskTitle] = React.useState()
   React.useEffect(() => {
-    setTaskTitle(window.localStorage.getItem("titles"))
+    setTaskTitle(window.localStorage.getItem("title"))
   }, [tasktitle])
   return (
     <>

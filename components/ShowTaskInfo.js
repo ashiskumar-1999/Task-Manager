@@ -1,7 +1,6 @@
 import React from "react"
 import {
   Button,
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -17,42 +16,30 @@ const ShowTaskInfo = ({
   showTaskInfoOnOpen,
   showTaskInfoOnClose,
 }) => {
-  const {
-    isOpen: addSubTaskIsOpen,
-    onOpen: addSubTaskOnOpen,
-    onClose: addSubTaskOnClose,
-  } = useDisclosure()
+  const handleCreatesubTask = (e) => {
+    return <AddSubTask />
+  }
   return (
-    <>
-      <Modal isOpen={showTaskInfoIsOpen} onClose={showTaskInfoOnClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Button colorScheme="blue" mr={3} onClick={addSubTaskOnOpen}>
-              Add Subtask
-            </Button>
-          </ModalHeader>
-          <ModalBody>
-            <Text fontSize="xl" fontWeight="bold">
-              Title
-            </Text>
-            <Text fontSize="lg" fontWeight="normal">
-              Description
-            </Text>
-          </ModalBody>
+    <Modal isOpen={showTaskInfoIsOpen} onClose={showTaskInfoOnClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Modal Title</ModalHeader>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={showTaskInfoOnClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-      <AddSubTask
-        addSubTaskIsOpen={addSubTaskIsOpen}
-        addSubTaskOnClose={addSubTaskOnClose}
-      />
-    </>
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={showTaskInfoOnClose}>
+            Close
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              handleCreatesubTask()
+            }}
+          >
+            Create Sub Task
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   )
 }
 

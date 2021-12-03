@@ -19,17 +19,9 @@ const AddTaskForm = () => {
   const { onOpen, isOpen, onClose } = useDisclosure()
   const [title, setTitle] = React.useState(null)
   const [description, setDescription] = React.useState(null)
-
   const handleCreateTask = () => {
-    if (localStorage.getItem("titles") == null) {
-      localStorage.setItem("titles", "[]")
-    }
-    var currentTitle = JSON.parse(localStorage.getItem("titles"))
-    currentTitle.push(title)
-    localStorage.setItem("titles", JSON.stringify(currentTitle))
-    /* 
-    window.localStorage.setItem("title", titles)
-    window.localStorage.setItem("description", description) */
+    window.localStorage.setItem("title", title)
+    window.localStorage.setItem("description", description)
   }
   return (
     <Box>

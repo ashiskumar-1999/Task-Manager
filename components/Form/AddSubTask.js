@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
   Button,
   FormLabel,
@@ -13,11 +13,16 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 
-function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
-  const [subtask, setSubtask] = useState()
+function AddSubTask() {
+  const [subtask, setSubtask] = React.useState()
+  const {
+    isOpen: showTaskInfoIsOpen,
+    onOpen: showTaskInfoOnOpen,
+    onClose: showTaskInfoOnClose,
+  } = useDisclosure()
   return (
     <>
-      <Modal isOpen={addSubTaskIsOpen} onClose={addSubTaskOnClose}>
+      <Modal isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>
@@ -35,10 +40,16 @@ function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={addSubTaskOnClose}>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={addSubTaskOnClose}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                handleCreateTask()
+                onClose()
+              }}
+            >
               Create sub task
             </Button>
           </ModalFooter>
