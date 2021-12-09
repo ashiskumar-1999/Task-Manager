@@ -1,5 +1,12 @@
-import React, { useState, useEffct } from "react"
-import { Box, Button, Text, Flex, useDisclosure } from "@chakra-ui/react"
+import React, { useState, useEffect } from "react"
+import {
+  Box,
+  Button,
+  Text,
+  Flex,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react"
 import ShowTaskInfo from "./ShowTaskInfo"
 
 const TaskContainer = ({ label, title }) => {
@@ -8,6 +15,19 @@ const TaskContainer = ({ label, title }) => {
     onOpen: showTaskInfoOnOpen,
     onClose: showTaskInfoOnClose,
   } = useDisclosure()
+
+  let tasks = null
+  if (typeof window !== "undefined") {
+    tasks = JSON.parse(localStorage.getItem("titles"))
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [tasktitle, setTaskTitle] = useState(tasks)
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      setTaskTitle(tasktitle)
+    }, [tasktitle])
+  }
+
   return (
     <>
       <Flex
@@ -24,10 +44,16 @@ const TaskContainer = ({ label, title }) => {
             {label}
           </Text>
         </Box>
-        <Button text-align="left" p="5px" onClick={showTaskInfoOnOpen}>
-          {title}
-        </Button>
 
+        {tasks && (
+          <VStack spacing={2}>
+            {tasks?.map((task, i) => (
+              <Button w="300px" onClick={showTaskInfoOnOpen} key={i}>
+                {task}
+              </Button>
+            ))}
+          </VStack>
+        )}
         <ShowTaskInfo
           showTaskInfoIsOpen={showTaskInfoIsOpen}
           showTaskInfoOnClose={showTaskInfoOnClose}

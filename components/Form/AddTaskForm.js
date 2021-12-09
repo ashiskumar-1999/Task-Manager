@@ -21,12 +21,19 @@ const AddTaskForm = () => {
   const [description, setDescription] = React.useState(null)
 
   const handleCreateTask = () => {
-    if (localStorage.getItem("titles") == null) {
-      localStorage.setItem("titles", "[]")
+    if (!localStorage.getItem("titles")) {
+      localStorage.setItem("titles", JSON.stringify([]))
     }
     var currentTitle = JSON.parse(localStorage.getItem("titles"))
     currentTitle.push(title)
     localStorage.setItem("titles", JSON.stringify(currentTitle))
+
+    if (!localStorage.getItem("descriptions")) {
+      localStorage.setItem("descriptions", "[]")
+    }
+    var currentDescription = JSON.parse(localStorage.getItem("descriptions"))
+    currentDescription.push(description)
+    localStorage.setItem("descriptions", JSON.stringify(currentDescription))
     /* 
     window.localStorage.setItem("title", titles)
     window.localStorage.setItem("description", description) */

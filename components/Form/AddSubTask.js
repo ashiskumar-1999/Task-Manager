@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Button,
   FormLabel,
@@ -15,17 +15,25 @@ import {
 
 function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
   const [subtask, setSubtask] = useState()
+  const handleAddSubTask = () => {
+    if (!localStorage.getItem("subTasks")) {
+      localStorage.setItem("subTasks", JSON.stringify([]))
+    }
+    var subTaskValue = JSON.parse(localStorage.getItem("subTasks"))
+    subTaskValue.push(subtask)
+    localStorage.setItem("subTasks", JSON.stringify(subTaskValue))
+  }
+
   return (
     <>
       <Modal isOpen={addSubTaskIsOpen} onClose={addSubTaskOnClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader></ModalHeader>
+          <ModalHeader>Add the sub task</ModalHeader>
 
           <ModalBody>
             <form>
               <FormControl isRequired>
-                <FormLabel>Add the sub task</FormLabel>
                 <Input
                   value={subtask}
                   onChange={(e) => setSubtask(e.target.value)}
@@ -38,7 +46,7 @@ function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
             <Button colorScheme="blue" mr={3} onClick={addSubTaskOnClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={addSubTaskOnClose}>
+            <Button variant="ghost" onClick={handleAddSubTask}>
               Create sub task
             </Button>
           </ModalFooter>

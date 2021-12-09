@@ -1,7 +1,11 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
+  Box,
   Button,
   Text,
+  CheckboxGroup,
+  Checkbox,
+  VStack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -22,6 +26,18 @@ const ShowTaskInfo = ({
     onOpen: addSubTaskOnOpen,
     onClose: addSubTaskOnClose,
   } = useDisclosure()
+  let subtasks = null
+  if (typeof window !== "undefined") {
+    subtasks = JSON.parse(localStorage.getItem("subTasks"))
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [subTaskTitle, setSubTaskTitle] = useState(subtasks)
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      setSubTaskTitle(subTaskTitle)
+    }, [subTaskTitle])
+  }
+
   return (
     <>
       <Modal isOpen={showTaskInfoIsOpen} onClose={showTaskInfoOnClose}>
@@ -33,12 +49,19 @@ const ShowTaskInfo = ({
             </Button>
           </ModalHeader>
           <ModalBody>
-            <Text fontSize="xl" fontWeight="bold">
-              Title
-            </Text>
+            <Text fontSize="xl" fontWeight="bold"></Text>
             <Text fontSize="lg" fontWeight="normal">
               Description
             </Text>
+            {subtasks && (
+              <VStack align="flex-start">
+                {subtasks.map((subtask, i) => (
+                  <Checkbox value="naruto" key={i}>
+                    {subtask}
+                  </Checkbox>
+                ))}
+              </VStack>
+            )}
           </ModalBody>
 
           <ModalFooter>
