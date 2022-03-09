@@ -27,6 +27,7 @@ const AddTaskForm = () => {
     var currentTitle = JSON.parse(localStorage.getItem("titles"))
     currentTitle.push(title)
     localStorage.setItem("titles", JSON.stringify(currentTitle))
+    console.log("key is", titles[key])
 
     if (!localStorage.getItem("descriptions")) {
       localStorage.setItem("descriptions", "[]")
@@ -41,7 +42,7 @@ const AddTaskForm = () => {
   return (
     <Box>
       <Button colorScheme="blue" onClick={onOpen}>
-        Open Modal
+        Create Task
       </Button>
 
       <Modal isOpen={isOpen}>

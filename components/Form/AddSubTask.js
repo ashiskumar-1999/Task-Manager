@@ -15,8 +15,9 @@ import {
 
 function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
   const [subtask, setSubtask] = useState()
+
   const handleAddSubTask = () => {
-    if (!localStorage.getItem("subTasks")) {
+    if (localStorage.getItem(titles[key])) {
       localStorage.setItem("subTasks", JSON.stringify([]))
     }
     var subTaskValue = JSON.parse(localStorage.getItem("subTasks"))
@@ -46,7 +47,13 @@ function AddSubTask({ addSubTaskIsOpen, addSubTaskOnOpen, addSubTaskOnClose }) {
             <Button colorScheme="blue" mr={3} onClick={addSubTaskOnClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={handleAddSubTask}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                handleAddSubTask()
+                addSubTaskOnClose()
+              }}
+            >
               Create sub task
             </Button>
           </ModalFooter>

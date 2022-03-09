@@ -19,6 +19,7 @@ const TaskContainer = ({ label, title }) => {
   let tasks = null
   if (typeof window !== "undefined") {
     tasks = JSON.parse(localStorage.getItem("titles"))
+    console.log(tasks.key)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [tasktitle, setTaskTitle] = useState(tasks)
 
@@ -48,7 +49,12 @@ const TaskContainer = ({ label, title }) => {
         {tasks && (
           <VStack spacing={2}>
             {tasks?.map((task, i) => (
-              <Button w="300px" onClick={showTaskInfoOnOpen} key={i}>
+              <Button
+                w="300px"
+                onClick={showTaskInfoOnOpen}
+                key={i}
+                isTruncated
+              >
                 {task}
               </Button>
             ))}

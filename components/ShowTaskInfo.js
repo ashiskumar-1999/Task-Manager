@@ -13,14 +13,11 @@ import {
   ModalFooter,
   ModalBody,
   useDisclosure,
+  AlertTitle,
 } from "@chakra-ui/react"
 import AddSubTask from "./Form/AddSubTask"
 
-const ShowTaskInfo = ({
-  showTaskInfoIsOpen,
-  showTaskInfoOnOpen,
-  showTaskInfoOnClose,
-}) => {
+const ShowTaskInfo = ({ showTaskInfoIsOpen, showTaskInfoOnClose }) => {
   const {
     isOpen: addSubTaskIsOpen,
     onOpen: addSubTaskOnOpen,
@@ -49,7 +46,9 @@ const ShowTaskInfo = ({
             </Button>
           </ModalHeader>
           <ModalBody>
-            <Text fontSize="xl" fontWeight="bold"></Text>
+            <Text fontSize="xl" fontWeight="bold">
+              {/* {taskTitle} */}
+            </Text>
             <Text fontSize="lg" fontWeight="normal">
               Description
             </Text>
